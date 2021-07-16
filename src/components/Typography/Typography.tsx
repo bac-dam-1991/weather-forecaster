@@ -6,24 +6,26 @@ export type TypographyVariant =
 	| 'body'
 	| 'caption'
 	| 'paragraph';
+
 export interface TypographyProps {
-	variant: TypographyVariant;
+	variant?: TypographyVariant;
+	text: string;
 }
 
-const Typography: React.FC<TypographyProps> = ({ variant, children }) => {
+const Typography: React.FC<TypographyProps> = ({ variant = 'body', text }) => {
 	switch (variant) {
 		case 'heading':
-			return <h1>{children}</h1>;
+			return <h1>{text}</h1>;
 		case 'subheading':
-			return <h2>{children}</h2>;
+			return <h2>{text}</h2>;
 		case 'body':
-			return <span>{children}</span>;
+			return <span>{text}</span>;
 		case 'caption':
-			return <span>{children}</span>;
+			return <span>{text}</span>;
 		case 'paragraph':
-			return <p>{children}</p>;
+			return <p>{text}</p>;
 		default:
-			return <span>{children}</span>;
+			return <span>{text}</span>;
 	}
 };
 

@@ -19,5 +19,6 @@ export const getGeoCoding = (
 		qParams.push(countryCode);
 	}
 	params.append('q', qParams.join(','));
+	params.append('limit', '5');
 	return axios.get(URLS.GEOCODING, { params });
 };

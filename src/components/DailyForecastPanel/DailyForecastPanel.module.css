@@ -1,0 +1,23 @@
+.root {
+	height: 100px;
+	width: 100%;
+	display: block;
+	background-color: aquamarine;
+	margin-bottom: var(--margin-standard);
+	animation-name: animateIn;
+	animation-duration: 200ms;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: both;
+}
+
+@keyframes animateIn {
+	0% {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}

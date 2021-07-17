@@ -11,3 +11,11 @@ export const STATUS_CODES = {
 	NOT_FOUND: 404,
 	INTERNAL_SERVER_ERROR: 500,
 };
+
+export const DURATIONS = {
+	ERROR_TIMEOUT: 5000,
+};
+
+export const MESSAGES = {
+	CITY_NOT_FOUND: 'No city found matching provided city name.',
+};

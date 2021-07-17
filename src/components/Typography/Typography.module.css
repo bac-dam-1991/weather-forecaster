@@ -17,3 +17,13 @@
 .caption {
 	font-size: var(--font-sm);
 }
+
+.link {
+	font-size: var(--font-body);
+	cursor: pointer;
+	color: var(--grey-dark);
+}
+
+.link:hover {
+	text-decoration: underline;
+}

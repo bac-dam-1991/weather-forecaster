@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { getGeoCodings } from '../apis/openWeatherMapApis';
-import { DURATIONS, MESSAGES, STATUS_CODES } from '../config/constants';
+import { MESSAGES, STATUS_CODES } from '../config/constants';
 import { IGeoCodingResponse } from '../interfaces/IGeoCodingResponse';
 
 export const useGetGeoCodings = () => {
@@ -10,17 +10,19 @@ export const useGetGeoCodings = () => {
 
 	const loadGeoCodings = useCallback(async (cityName: string) => {
 		try {
+			setGeoCodings([]);
 			if (!cityName) {
 				throw new Error(MESSAGES.CITY_NAME_EMPTY);
 			}
 			setLoading(true);
 			setError('');
 			const _geoCodings = await getGeoCodings(cityName);
+			if (!_geoCodings.length) {
+				throw new Error(MESSAGES.CITY_NOT_FOUND);
+			}
 			setGeoCodings(_geoCodings);
 		} catch (error) {
-			setTimeout(() => {
-				setError('');
-			}, DURATIONS.ERROR_TIMEOUT);
+			setGeoCodings([]);
 			if (error.response && error.response.status === STATUS_CODES.NOT_FOUND) {
 				setError(MESSAGES.CITY_NOT_FOUND);
 				return;

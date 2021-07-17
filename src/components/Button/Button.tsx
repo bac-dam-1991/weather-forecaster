@@ -37,7 +37,10 @@ const Button: React.FC<ButtonProps> = ({
 	}
 
 	return (
-		<button {...buttonProps} className={clsx(cssClasses.join(' '), className)}>
+		<button
+			{...buttonProps}
+			className={clsx(cssClasses.join(' '), className, styles.button)}
+		>
 			{label}
 		</button>
 	);

@@ -7,3 +7,11 @@
 .buttonLarge {
 	height: var(--button-large);
 }
+.button {
+	cursor: pointer;
+	padding: 0 var(--spacing-small);
+	transition: var(--duration-standard);
+}
+.button:hover {
+	filter: brightness(1.05);
+}

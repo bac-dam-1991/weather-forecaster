@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { IGeoCodingResponse } from '../../interfaces/IGeoCodingResponse';
 import Typography from '../Typography/Typography';
 import styles from './GeoCodePanel.module.css';
 
-export interface GeoCodePanelProps {
+export interface GeoCodePanelProps extends HTMLAttributes<HTMLDivElement> {
 	data: IGeoCodingResponse;
 }
 
-const GeoCodePanel: React.FC<GeoCodePanelProps> = ({ data }) => {
+const GeoCodePanel: React.FC<GeoCodePanelProps> = ({ data, ...divProps }) => {
 	const { name, lat, lon, country } = data;
 
 	const city = `${name}, ${country}`;
 	const latitude = `Lat: ${lat.toFixed(2)}`;
 	const longitude = `Lng: ${lon.toFixed(2)}`;
 	return (
-		<div className={styles.root}>
+		<div className={styles.root} {...divProps}>
 			<div>
 				<Typography text={city} bold />
 			</div>

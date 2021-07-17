@@ -6,10 +6,15 @@
 
 .inputGeocoding {
 	flex-grow: 1;
+	border: 1px solid var(--grey-main);
+	border-top-left-radius: var(--spacing-xs);
+	border-bottom-left-radius: var(--spacing-xs);
+	border-right: none;
 }
 
-.searchResultsContainer {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-small);
+.submitButton {
+	border: none;
+	background-color: var(--grey-main);
+	border-top-right-radius: var(--spacing-xs);
+	border-bottom-right-radius: var(--spacing-xs);
 }

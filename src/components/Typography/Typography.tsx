@@ -8,7 +8,8 @@ export type TypographyVariant =
 	| 'body'
 	| 'caption'
 	| 'paragraph'
-	| 'error';
+	| 'error'
+	| 'link';
 
 export interface TypographyProps {
 	variant?: TypographyVariant;
@@ -16,6 +17,7 @@ export interface TypographyProps {
 	className?: string;
 	bold?: boolean;
 	italic?: boolean;
+	onClick?: () => void;
 }
 
 const Typography: React.FC<TypographyProps> = ({
@@ -24,6 +26,7 @@ const Typography: React.FC<TypographyProps> = ({
 	className,
 	bold,
 	italic,
+	onClick,
 }) => {
 	let children = bold ? <strong>{text}</strong> : text;
 	children = italic ? <em>{children}</em> : children;
@@ -39,9 +42,19 @@ const Typography: React.FC<TypographyProps> = ({
 				<span className={clsx(className, styles.caption)}>{children}</span>
 			);
 		case 'error':
-			return <span className={clsx(styles.error, className)}>{children}</span>;
+			return (
+				<span className={clsx(styles.error, styles.caption, className)}>
+					{children}
+				</span>
+			);
 		case 'paragraph':
 			return <p className={clsx(className, styles.body)}>{children}</p>;
+		case 'link':
+			return (
+				<span className={clsx(className, styles.link)} onClick={onClick}>
+					{children}
+				</span>
+			);
 		default:
 			return <span className={clsx(className, styles.body)}>{children}</span>;
 	}

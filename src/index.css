@@ -17,6 +17,8 @@ html {
 	/* Colors */
 	--error: rgb(238, 42, 42);
 	--grey-light: #efefef;
+	--grey-main: #dfdfdf;
+	--grey-dark: #aaaaaa;
 
 	/* Input attributes */
 	--input-small: 24px;
@@ -33,4 +35,7 @@ html {
 	--font-body: 14px;
 	--font-medium: 18px;
 	--font-large: 24px;
+
+	/* Durations */
+	--duration-standard: 200ms;
 }

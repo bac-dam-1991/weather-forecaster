@@ -1,6 +1,12 @@
 .root {
 	padding: var(--spacing-small);
 	border-bottom: 1px solid var(--grey-light);
+	transition: var(--duration-standard);
+	cursor: pointer;
+}
+
+.root:hover {
+	background-color: var(--grey-light);
 }
 
 .latLngContainer {

@@ -2,9 +2,11 @@ import React, { Fragment } from 'react';
 import { useGetGeoCodings } from '../../hooks/useGetGeoCoding';
 import { IGeoCodingResponse } from '../../interfaces/IGeoCodingResponse';
 import Button from '../Button/Button';
+import GeoCodePanel from '../GeoCodePanel/GeoCodePanel';
 import TextInput from '../TextInput/TextInput';
 import Typography from '../Typography/Typography';
 import styles from './CitySearchBar.module.css';
+import { v4 as uuid } from 'uuid';
 
 export interface CitySearchBarProps {}
 
@@ -44,9 +46,11 @@ const CitySearchBar: React.FC<CitySearchBarProps> = () => {
 			{loading ? (
 				<Typography text="Loading..." />
 			) : (
-				geoCodings.map((code: IGeoCodingResponse) => {
-					return <Typography text={code.name} variant="paragraph" />;
-				})
+				<div className={styles.searchResultsContainer}>
+					{geoCodings.map((code: IGeoCodingResponse) => {
+						return <GeoCodePanel data={code} key={uuid()} />;
+					})}
+				</div>
 			)}
 		</Fragment>
 	);

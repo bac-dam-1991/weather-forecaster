@@ -1,0 +1,10 @@
+.root {
+	padding: var(--spacing-small);
+	border-bottom: 1px solid var(--grey-light);
+}
+
+.latLngContainer {
+	display: flex;
+	flex-direction: row;
+	gap: var(--spacing-small);
+}

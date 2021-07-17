@@ -1,8 +1,15 @@
 .formGeocoding {
 	display: flex;
 	flex-direction: row;
+	margin-bottom: var(--spacing-small);
 }
 
 .inputGeocoding {
 	flex-grow: 1;
+}
+
+.searchResultsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-small);
 }

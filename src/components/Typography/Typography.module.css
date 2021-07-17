@@ -1,3 +1,19 @@
 .error {
 	color: var(--error);
 }
+
+.heading {
+	font-size: var(--font-large);
+}
+
+.subheading {
+	font-size: var(--font-medium);
+}
+
+.body {
+	font-size: var(--font-body);
+}
+
+.caption {
+	font-size: var(--font-sm);
+}

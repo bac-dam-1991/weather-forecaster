@@ -18,4 +18,5 @@ export const DURATIONS = {
 
 export const MESSAGES = {
 	CITY_NOT_FOUND: 'No city found matching provided city name.',
+	CITY_NAME_EMPTY: 'City name cannot be empty.',
 };

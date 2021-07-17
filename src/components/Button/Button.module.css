@@ -1,0 +1,9 @@
+.buttonSmall {
+	height: var(--button-small);
+}
+.buttonStandard {
+	height: var(--button-standard);
+}
+.buttonLarge {
+	height: var(--button-large);
+}

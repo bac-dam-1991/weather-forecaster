@@ -10,6 +10,9 @@ export const useGetGeoCodings = () => {
 
 	const loadGeoCodings = useCallback(async (cityName: string) => {
 		try {
+			if (!cityName) {
+				throw new Error(MESSAGES.CITY_NAME_EMPTY);
+			}
 			setLoading(true);
 			setError('');
 			const _geoCodings = await getGeoCodings(cityName);
@@ -18,7 +21,7 @@ export const useGetGeoCodings = () => {
 			setTimeout(() => {
 				setError('');
 			}, DURATIONS.ERROR_TIMEOUT);
-			if (error.response.status === STATUS_CODES.NOT_FOUND) {
+			if (error.response && error.response.status === STATUS_CODES.NOT_FOUND) {
 				setError(MESSAGES.CITY_NOT_FOUND);
 				return;
 			}

@@ -10,4 +10,10 @@ html {
 	--spacing-small: 8px;
 	--spacing-standard: 16px;
 	--error: rgb(238, 42, 42);
+	--input-small: 24px;
+	--input-standard: 32px;
+	--input-large: 40px;
+	--button-small: 24px;
+	--button-standard: 32px;
+	--button-large: 40px;
 }

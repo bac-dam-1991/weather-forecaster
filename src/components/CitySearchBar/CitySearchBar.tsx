@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useGetGeoCodings } from '../../hooks/useGetGeoCoding';
 import { IGeoCodingResponse } from '../../interfaces/IGeoCodingResponse';
+import Button from '../Button/Button';
 import TextInput from '../TextInput/TextInput';
 import Typography from '../Typography/Typography';
 import styles from './CitySearchBar.module.css';
@@ -13,7 +14,8 @@ const CitySearchBar: React.FC<CitySearchBarProps> = () => {
 	const { geoCodings, loadGeoCodings, loading, error } = useGetGeoCodings();
 
 	const handleCityNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setCityName(event.target.value);
+		const val = event.target.value.trim();
+		setCityName(val);
 	};
 
 	const handleSubmit = async (event: React.FormEvent) => {
@@ -36,7 +38,7 @@ const CitySearchBar: React.FC<CitySearchBarProps> = () => {
 					placeholder="Enter a city name"
 					ref={inputRef}
 				/>
-				<input type="submit" value="Search" />
+				<Button label="Search" />
 			</form>
 			{error && <Typography text={error} variant="error" />}
 			{loading ? (

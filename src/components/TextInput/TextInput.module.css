@@ -1,4 +1,6 @@
 .textInput {
-	padding: var(--spacing-small);
+	height: var(--input-standard);
+	padding: 0 var(--spacing-small);
 	outline: none;
+	box-sizing: border-box;
 }

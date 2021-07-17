@@ -1,0 +1,4 @@
+.textInput {
+	padding: var(--spacing-small);
+	outline: none;
+}

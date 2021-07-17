@@ -1,11 +1,13 @@
-import * as React from 'react';
+import React from 'react';
+import styles from './Typography.module.css';
 
 export type TypographyVariant =
 	| 'heading'
 	| 'subheading'
 	| 'body'
 	| 'caption'
-	| 'paragraph';
+	| 'paragraph'
+	| 'error';
 
 export interface TypographyProps {
 	variant?: TypographyVariant;
@@ -22,6 +24,8 @@ const Typography: React.FC<TypographyProps> = ({ variant = 'body', text }) => {
 			return <span>{text}</span>;
 		case 'caption':
 			return <span>{text}</span>;
+		case 'error':
+			return <span className={styles.error}>{text}</span>;
 		case 'paragraph':
 			return <p>{text}</p>;
 		default:

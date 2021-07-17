@@ -3,7 +3,7 @@
 	width: 100%;
 	display: block;
 	background-color: aquamarine;
-	margin-bottom: var(--margin-standard);
+	margin-bottom: var(--spacing-standard);
 	animation-name: animateIn;
 	animation-duration: 200ms;
 	animation-timing-function: ease-in-out;

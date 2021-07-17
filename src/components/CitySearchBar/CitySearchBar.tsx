@@ -1,19 +1,18 @@
-import React, { Fragment } from "react";
-import { useGetGeoCodings } from "../../hooks/useGetGeoCoding";
-import { IGeoCodingResponse } from "../../interfaces/IGeoCodingResponse";
-import Typography from "../Typography/Typography";
-import styles from "./CitySearchBar.module.css";
+import React, { Fragment } from 'react';
+import { useGetGeoCodings } from '../../hooks/useGetGeoCoding';
+import { IGeoCodingResponse } from '../../interfaces/IGeoCodingResponse';
+import TextInput from '../TextInput/TextInput';
+import Typography from '../Typography/Typography';
+import styles from './CitySearchBar.module.css';
 
 export interface CitySearchBarProps {}
 
 const CitySearchBar: React.FC<CitySearchBarProps> = () => {
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
-	const [cityName, setCityName] = React.useState<string>("");
-	const { geoCodings, loadGeoCodings, loading } = useGetGeoCodings();
+	const [cityName, setCityName] = React.useState<string>('');
+	const { geoCodings, loadGeoCodings, loading, error } = useGetGeoCodings();
 
-	const handleCityNameChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
+	const handleCityNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setCityName(event.target.value);
 	};
 
@@ -23,23 +22,23 @@ const CitySearchBar: React.FC<CitySearchBarProps> = () => {
 			return;
 		}
 		await loadGeoCodings(cityName);
-		inputRef.current.value = "";
+		inputRef.current.value = '';
 	};
 
 	return (
 		<Fragment>
 			<form onSubmit={handleSubmit} className={styles.formGeocoding}>
-				<input
-					autoFocus
-					type="text"
-					placeholder="Enter city name"
-					defaultValue={cityName}
-					ref={inputRef}
+				<TextInput
 					onChange={handleCityNameChange}
+					autoFocus
 					className={styles.inputGeocoding}
+					defaultValue={cityName}
+					placeholder="Enter a city name"
+					ref={inputRef}
 				/>
 				<input type="submit" value="Search" />
 			</form>
+			{error && <Typography text={error} variant="error" />}
 			{loading ? (
 				<Typography text="Loading..." />
 			) : (

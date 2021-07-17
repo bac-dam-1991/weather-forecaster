@@ -7,5 +7,7 @@ html {
 }
 
 :root {
-	--margin-standard: 16px;
+	--spacing-small: 8px;
+	--spacing-standard: 16px;
+	--error: rgb(238, 42, 42);
 }

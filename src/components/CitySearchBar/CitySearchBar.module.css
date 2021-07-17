@@ -1,0 +1,8 @@
+.formGeocoding {
+	display: flex;
+	flex-direction: row;
+}
+
+.inputGeocoding {
+	flex-grow: 1;
+}

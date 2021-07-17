@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { useGetGeoCodings } from "../../hooks/useGetGeoCoding";
 import { IGeoCodingResponse } from "../../interfaces/IGeoCodingResponse";
 import Typography from "../Typography/Typography";
-// import styles from './CitySearchBar.module.css';
+import styles from "./CitySearchBar.module.css";
 
 export interface CitySearchBarProps {}
 
@@ -28,13 +28,15 @@ const CitySearchBar: React.FC<CitySearchBarProps> = () => {
 
 	return (
 		<Fragment>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className={styles.formGeocoding}>
 				<input
+					autoFocus
 					type="text"
 					placeholder="Enter city name"
 					defaultValue={cityName}
 					ref={inputRef}
 					onChange={handleCityNameChange}
+					className={styles.inputGeocoding}
 				/>
 				<input type="submit" value="Search" />
 			</form>

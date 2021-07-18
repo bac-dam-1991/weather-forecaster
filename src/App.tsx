@@ -5,6 +5,7 @@ import { useGetGeoCodings } from './hooks/useGetGeoCoding';
 import { IGeoCodingResponse } from './interfaces/IGeoCodingResponse';
 import DailyView from './views/DailyView';
 import SearchView from './views/SearchView';
+import styles from './App.module.css';
 
 export interface AppProps {}
 
@@ -39,8 +40,9 @@ const App: React.FC<AppProps> = () => {
 	};
 
 	return (
-		<Container>
+		<Container className={styles.root}>
 			<Typography text="Weather forecast" variant="heading" display="block" />
+
 			{!selectedGeoCode && (
 				<SearchView
 					onSubmit={handleSubmit}

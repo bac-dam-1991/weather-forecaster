@@ -1,10 +1,13 @@
-import * as React from "react";
-import styles from "./Container.module.css";
+import * as React from 'react';
+import styles from './Container.module.css';
+import clsx from 'clsx';
 
-export interface ContainerProps {}
+export interface ContainerProps {
+	className?: string;
+}
 
-const Container: React.FC<ContainerProps> = ({ children }) => {
-	return <div className={styles.root}>{children}</div>;
+const Container: React.FC<ContainerProps> = ({ children, className }) => {
+	return <div className={clsx(styles.root, className)}>{children}</div>;
 };
 
 export default Container;

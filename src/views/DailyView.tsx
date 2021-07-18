@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
-import DailyForecastPanel from '../components/DailyForecastPanel/DailyForecastPanel';
 import Typography from '../components/Typography/Typography';
 import { useGetDailyForecast } from '../hooks/useGetForecast';
-import { IForecast } from '../interfaces/IForecast';
 import { IGeoCodingResponse } from '../interfaces/IGeoCodingResponse';
 import { LatLng } from '../types/LatLng';
+import axios from 'axios';
+import ForecastContainer from '../components/ForecastsContainer/ForecastContainer';
 
 export interface DailyViewProps {
 	clearSelectedGeoCode: () => void;
@@ -15,8 +15,7 @@ const DailyView: React.FC<DailyViewProps> = ({
 	clearSelectedGeoCode,
 	selectedGeoCode,
 }) => {
-	const { forecasts, getDailyForecast, loading, cancelTokenSourceRef } =
-		useGetDailyForecast();
+	const { forecasts, getDailyForecast, loading } = useGetDailyForecast();
 
 	useEffect(() => {
 		const { lat, lon: lng } = selectedGeoCode;
@@ -24,12 +23,13 @@ const DailyView: React.FC<DailyViewProps> = ({
 			lat,
 			lng,
 		};
-		getDailyForecast(coordinate);
-		const source = cancelTokenSourceRef.current;
+		const source = axios.CancelToken.source();
+		const { token } = source;
+		getDailyForecast(coordinate, token);
 		return () => {
 			source.cancel();
 		};
-	}, [getDailyForecast, selectedGeoCode, cancelTokenSourceRef]);
+	}, [getDailyForecast, selectedGeoCode]);
 	return (
 		<Fragment>
 			<Typography
@@ -41,12 +41,7 @@ const DailyView: React.FC<DailyViewProps> = ({
 			{loading && (
 				<Typography text="Loading..." variant="caption" display="block" />
 			)}
-			{forecasts &&
-				forecasts.daily.map((forecast: IForecast, index: number) => {
-					return (
-						<DailyForecastPanel data={forecast} index={index} key={index} />
-					);
-				})}
+			{forecasts && <ForecastContainer forecasts={forecasts} />}
 		</Fragment>
 	);
 };

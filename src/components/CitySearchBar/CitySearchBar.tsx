@@ -40,7 +40,7 @@ const CitySearchBar: React.FC<CitySearchBarProps> = ({
 				<Button
 					label="Search"
 					className={styles.submitButton}
-					disabled={cityName === ''}
+					disabled={cityName.length < 2}
 				/>
 			</form>
 			{error && <Typography text={error} variant="error" />}

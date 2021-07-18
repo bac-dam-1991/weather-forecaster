@@ -1,6 +1,6 @@
 .root {
 	width: 100%;
-	display: block;
+	display: flex;
 	animation-name: animateIn;
 	animation-duration: 200ms;
 	animation-timing-function: ease-in-out;
@@ -10,11 +10,25 @@
 	transition: var(--duration-standard);
 	border-left: 0 solid var(--grey-main);
 	cursor: pointer;
+	box-sizing: border-box;
 }
 
 .root:hover {
 	border-left: 10px solid var(--grey-main);
 	padding-left: var(--spacing-small);
+}
+
+.detailsContainer {
+	flex-grow: 1;
+}
+
+.imageContainer {
+	display: block;
+}
+
+.image {
+	height: 60px;
+	width: 60px;
 }
 
 .typography {

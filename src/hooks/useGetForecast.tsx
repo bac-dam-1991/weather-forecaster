@@ -1,16 +1,17 @@
-import { useState, useCallback } from "react";
-import { getForecast } from "../apis/openWeatherMapApis";
-import { LatLng } from "../types/LatLng";
+import { useState, useCallback } from 'react';
+import { getForecast } from '../apis/openWeatherMapApis';
+import { IForecastResponse } from '../interfaces/IForecastResponse';
+import { LatLng } from '../types/LatLng';
 
 export const useGetDailyForecast = () => {
-	const [forecasts, setForecasts] = useState<Record<string, any>[]>([]);
-	const [error, setError] = useState<string>("");
+	const [forecasts, setForecasts] = useState<IForecastResponse | null>(null);
+	const [error, setError] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const getDailyForecast = useCallback(async (coordinate: LatLng) => {
 		try {
 			setLoading(true);
-			const _forecasts = await getForecast(coordinate, ["daily"]);
+			const _forecasts = await getForecast(coordinate, ['daily']);
 			console.log({ _forecasts });
 			setForecasts(_forecasts);
 		} catch (error) {

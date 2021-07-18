@@ -3,6 +3,7 @@ import Container from './components/Container/Container';
 import Typography from './components/Typography/Typography';
 import { useGetGeoCodings } from './hooks/useGetGeoCoding';
 import { IGeoCodingResponse } from './interfaces/IGeoCodingResponse';
+import DailyView from './views/DailyView';
 import SearchView from './views/SearchView';
 
 export interface AppProps {}
@@ -53,10 +54,9 @@ const App: React.FC<AppProps> = () => {
 				/>
 			)}
 			{selectedGeoCode && (
-				<Typography
-					variant="link"
-					text="< Return"
-					onClick={clearSelectedGeoCode}
+				<DailyView
+					clearSelectedGeoCode={clearSelectedGeoCode}
+					selectedGeoCode={selectedGeoCode}
 				/>
 			)}
 		</Container>

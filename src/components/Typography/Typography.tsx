@@ -11,6 +11,9 @@ export type TypographyVariant =
 	| 'error'
 	| 'link';
 
+export type DisplayType = 'inline' | 'block';
+
+export type AlignType = 'center' | 'right' | 'left';
 export interface TypographyProps {
 	variant?: TypographyVariant;
 	text: string;
@@ -18,6 +21,8 @@ export interface TypographyProps {
 	bold?: boolean;
 	italic?: boolean;
 	onClick?: () => void;
+	display?: DisplayType;
+	align?: AlignType;
 }
 
 const Typography: React.FC<TypographyProps> = ({
@@ -27,36 +32,64 @@ const Typography: React.FC<TypographyProps> = ({
 	bold,
 	italic,
 	onClick,
+	display = 'inline',
+	align = 'left',
 }) => {
 	let children = bold ? <strong>{text}</strong> : text;
 	children = italic ? <em>{children}</em> : children;
+	const cssClasses = styles[display] + ' ' + styles[align];
 	switch (variant) {
 		case 'heading':
-			return <h1 className={clsx(className, styles.heading)}>{children}</h1>;
+			return (
+				<h1 className={clsx(cssClasses, className, styles.heading)}>
+					{children}
+				</h1>
+			);
 		case 'subheading':
-			return <h2 className={clsx(className, styles.subheading)}>{children}</h2>;
+			return (
+				<h2 className={clsx(cssClasses, className, styles.subheading)}>
+					{children}
+				</h2>
+			);
 		case 'body':
-			return <span className={clsx(className, styles.body)}>{children}</span>;
+			return (
+				<span className={clsx(cssClasses, className, styles.body)}>
+					{children}
+				</span>
+			);
 		case 'caption':
 			return (
-				<span className={clsx(className, styles.caption)}>{children}</span>
+				<span className={clsx(cssClasses, className, styles.caption)}>
+					{children}
+				</span>
 			);
 		case 'error':
 			return (
-				<span className={clsx(styles.error, styles.caption, className)}>
+				<span
+					className={clsx(cssClasses, styles.error, styles.caption, className)}
+				>
 					{children}
 				</span>
 			);
 		case 'paragraph':
-			return <p className={clsx(className, styles.body)}>{children}</p>;
+			return (
+				<p className={clsx(cssClasses, className, styles.body)}>{children}</p>
+			);
 		case 'link':
 			return (
-				<span className={clsx(className, styles.link)} onClick={onClick}>
+				<span
+					className={clsx(cssClasses, className, styles.link)}
+					onClick={onClick}
+				>
 					{children}
 				</span>
 			);
 		default:
-			return <span className={clsx(className, styles.body)}>{children}</span>;
+			return (
+				<span className={clsx(cssClasses, className, styles.body)}>
+					{children}
+				</span>
+			);
 	}
 };
 

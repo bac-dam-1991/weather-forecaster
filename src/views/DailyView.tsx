@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import DailyForecastPanel from '../components/DailyForecastPanel/DailyForecastPanel';
 import Typography from '../components/Typography/Typography';
 import { useGetDailyForecast } from '../hooks/useGetForecast';
 import { IForecast } from '../interfaces/IForecast';
@@ -33,8 +34,10 @@ const DailyView: React.FC<DailyViewProps> = ({
 				onClick={clearSelectedGeoCode}
 			/>
 			{forecasts &&
-				forecasts.daily.map((forecast: IForecast) => {
-					return <span>{forecast.temp.day}</span>;
+				forecasts.daily.map((forecast: IForecast, index: number) => {
+					return (
+						<DailyForecastPanel data={forecast} index={index} key={index} />
+					);
 				})}
 		</Fragment>
 	);

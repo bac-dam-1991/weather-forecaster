@@ -40,7 +40,7 @@ const App: React.FC<AppProps> = () => {
 
 	return (
 		<Container>
-			<Typography text="Weather forecast" variant="heading" />
+			<Typography text="Weather forecast" variant="heading" display="block" />
 			{!selectedGeoCode && (
 				<SearchView
 					onSubmit={handleSubmit}

@@ -1,13 +1,25 @@
 .root {
-	height: 100px;
 	width: 100%;
 	display: block;
-	background-color: aquamarine;
-	margin-bottom: var(--spacing-standard);
 	animation-name: animateIn;
 	animation-duration: 200ms;
 	animation-timing-function: ease-in-out;
 	animation-fill-mode: both;
+	border-bottom: 1px solid var(--grey-light);
+	padding: var(--spacing-standard) 0;
+	transition: var(--duration-standard);
+	border-left: 0 solid var(--grey-main);
+	cursor: pointer;
+}
+
+.root:hover {
+	border-left: 10px solid var(--grey-main);
+	padding-left: var(--spacing-small);
+}
+
+.typography {
+	width: 100px;
+	margin-right: var(--spacing-small);
 }
 
 @keyframes animateIn {

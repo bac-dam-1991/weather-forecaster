@@ -15,7 +15,8 @@ const DailyView: React.FC<DailyViewProps> = ({
 	clearSelectedGeoCode,
 	selectedGeoCode,
 }) => {
-	const { forecasts, getDailyForecast } = useGetDailyForecast();
+	const { forecasts, getDailyForecast, loading, cancelTokenSourceRef } =
+		useGetDailyForecast();
 
 	useEffect(() => {
 		const { lat, lon: lng } = selectedGeoCode;
@@ -24,15 +25,22 @@ const DailyView: React.FC<DailyViewProps> = ({
 			lng,
 		};
 		getDailyForecast(coordinate);
-	}, [getDailyForecast, selectedGeoCode]);
-
+		const source = cancelTokenSourceRef.current;
+		return () => {
+			source.cancel();
+		};
+	}, [getDailyForecast, selectedGeoCode, cancelTokenSourceRef]);
 	return (
 		<Fragment>
 			<Typography
 				variant="link"
 				text="< Return"
 				onClick={clearSelectedGeoCode}
+				display="block"
 			/>
+			{loading && (
+				<Typography text="Loading..." variant="caption" display="block" />
+			)}
 			{forecasts &&
 				forecasts.daily.map((forecast: IForecast, index: number) => {
 					return (

@@ -10,3 +10,8 @@ export const arrayDiff = <T extends unknown>(
 export const generateIconUrl = (icon: string) => {
 	return `${URLS.ICON}${icon}@2x.png`;
 };
+
+export const capitalise = (word: string) => {
+	const firstLetter = word[0];
+	return word.replace(firstLetter, firstLetter.toUpperCase());
+};

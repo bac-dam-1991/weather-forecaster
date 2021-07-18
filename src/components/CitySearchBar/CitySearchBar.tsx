@@ -37,10 +37,16 @@ const CitySearchBar: React.FC<CitySearchBarProps> = ({
 					placeholder="Enter a city name"
 					ref={inputRef}
 				/>
-				<Button label="Search" className={styles.submitButton} />
+				<Button
+					label="Search"
+					className={styles.submitButton}
+					disabled={cityName === ''}
+				/>
 			</form>
 			{error && <Typography text={error} variant="error" />}
-			{loading && <Typography text="Loading..." variant="caption" />}
+			{loading && (
+				<Typography text="Loading..." variant="caption" display="block" />
+			)}
 		</Fragment>
 	);
 };

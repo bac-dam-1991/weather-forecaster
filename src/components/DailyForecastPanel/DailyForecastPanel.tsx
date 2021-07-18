@@ -5,7 +5,7 @@ import { IForecast } from '../../interfaces/IForecast';
 import Typography from '../Typography/Typography';
 import { SPECIAL_CHARS } from '../../config/constants';
 import moment from 'moment';
-import { generateIconUrl } from '../../utility/utility';
+import { capitalise, generateIconUrl } from '../../utility/utility';
 
 export interface DailyForecastPanelProps {
 	index: number;
@@ -26,6 +26,7 @@ const DailyForecastPanel: React.FC<DailyForecastPanelProps> = ({
 		moment(dateTime * 1000).format('DD/MM/YYYY')
 			? 'Today'
 			: moment(dateTime * 1000).format('ddd Do MMM YYYY');
+	const description = weather[0].description;
 
 	return (
 		<div
@@ -34,7 +35,7 @@ const DailyForecastPanel: React.FC<DailyForecastPanelProps> = ({
 		>
 			<div className={styles.detailsContainer}>
 				<Typography text={date} bold />
-				<Typography text={weather[0].description} display="block" />
+				<Typography text={capitalise(description)} display="block" />
 				<div className={styles.tempContainer}>
 					<Typography
 						className={styles.typography}

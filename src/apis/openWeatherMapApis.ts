@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { CancelToken } from 'axios';
 import { API_KEY, URLS } from '../config/constants';
 import { IForecastResponse } from '../interfaces/IForecastResponse';
 import { IGeoCodingResponse } from '../interfaces/IGeoCodingResponse';
@@ -35,7 +35,8 @@ export const getGeoCodings = async (
 export const getForecast = async (
 	coordinate: LatLng,
 	includedIntervals: IntervalType[],
-	measurementUnit: MeasurementUnitType = 'metric'
+	measurementUnit: MeasurementUnitType = 'metric',
+	cancelToken: CancelToken
 ): Promise<IForecastResponse> => {
 	const params = new URLSearchParams();
 	if (API_KEY) {
@@ -51,6 +52,7 @@ export const getForecast = async (
 	params.append('units', measurementUnit);
 	const response = await axios.get<IForecastResponse>(URLS.ONE_CALL, {
 		params,
+		cancelToken,
 	});
 	return response.data;
 };

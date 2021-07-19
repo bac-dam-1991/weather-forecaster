@@ -1,25 +1,15 @@
-import { IFeelsLike } from './IFeelsLike';
-import { ITemp } from './ITemp';
-import { IWeather } from './IWeather';
+import { IWeather } from "./IWeather";
 
 export interface IForecast {
-	clouds: number;
-	dew_point: number;
 	dt: number;
-	feels_like: IFeelsLike;
-	humidity: number;
-	moon_phase: number;
-	moonrise: number;
-	moonset: number;
-	pop: number;
 	pressure: number;
-	rain: number;
-	sunrise: number;
-	sunset: number;
-	temp: ITemp;
+	humidity: number;
+	dew_point: number;
 	uvi: number;
-	weather: IWeather[];
+	clouds: number;
+	wind_speed: number;
 	wind_deg: number;
 	wind_gust: number;
-	wind_speed: number;
+	weather: IWeather[];
+	pop: number;
 }

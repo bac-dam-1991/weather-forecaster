@@ -1,15 +1,15 @@
-import * as React from 'react';
-import styles from './DailyForecastPanel.module.css';
-import clsx from 'clsx';
-import { IForecast } from '../../interfaces/IForecast';
-import Typography from '../Typography/Typography';
-import { SPECIAL_CHARS } from '../../config/constants';
-import moment from 'moment';
-import { capitalise, generateIconUrl } from '../../utility/utility';
+import * as React from "react";
+import styles from "./DailyForecastPanel.module.css";
+import clsx from "clsx";
+import { IDailyForecast } from "../../interfaces/IDailyForecast";
+import Typography from "../Typography/Typography";
+import { SPECIAL_CHARS } from "../../config/constants";
+import moment from "moment";
+import { capitalise, generateIconUrl } from "../../utility/utility";
 
 export interface DailyForecastPanelProps {
 	index: number;
-	data: IForecast;
+	data: IDailyForecast;
 }
 
 const DailyForecastPanel: React.FC<DailyForecastPanelProps> = ({
@@ -22,10 +22,10 @@ const DailyForecastPanel: React.FC<DailyForecastPanelProps> = ({
 	const tempNight = `Night: ${temp.night}${SPECIAL_CHARS.CELSIUS}`;
 	const tempMorning = `Morning: ${temp.morn}${SPECIAL_CHARS.CELSIUS}`;
 	const date =
-		moment().format('DD/MM/YYYY') ===
-		moment(dateTime * 1000).format('DD/MM/YYYY')
-			? 'Today'
-			: moment(dateTime * 1000).format('ddd Do MMM YYYY');
+		moment().format("DD/MM/YYYY") ===
+		moment(dateTime * 1000).format("DD/MM/YYYY")
+			? "Today"
+			: moment(dateTime * 1000).format("ddd Do MMM YYYY");
 	const description = weather[0].description;
 
 	return (

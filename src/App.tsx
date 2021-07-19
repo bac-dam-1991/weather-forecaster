@@ -6,6 +6,7 @@ import { IGeoCodingResponse } from "./interfaces/IGeoCodingResponse";
 import DailyView from "./views/DailyView";
 import SearchView from "./views/SearchView";
 import styles from "./App.module.css";
+import HourlyView from "./views/HourlyView";
 
 export interface AppProps {}
 
@@ -56,6 +57,7 @@ const App: React.FC<AppProps> = () => {
 
 	return (
 		<Container className={styles.root}>
+			<HourlyView />
 			<Typography
 				text="Weather forecast"
 				variant="heading"

@@ -3,11 +3,12 @@ import React, {
 	FormEvent,
 	ChangeEvent,
 	MutableRefObject,
-} from 'react';
-import Button from '../Button/Button';
-import TextInput from '../TextInput/TextInput';
-import Typography from '../Typography/Typography';
-import styles from './CitySearchBar.module.css';
+} from "react";
+import Button from "../Button/Button";
+import Loader from "../Loader/Loader";
+import TextInput from "../TextInput/TextInput";
+import Typography from "../Typography/Typography";
+import styles from "./CitySearchBar.module.css";
 
 export interface CitySearchBarProps {
 	onSubmit: (event: FormEvent) => void;
@@ -44,9 +45,7 @@ const CitySearchBar: React.FC<CitySearchBarProps> = ({
 				/>
 			</form>
 			{error && <Typography text={error} variant="error" />}
-			{loading && (
-				<Typography text="Loading..." variant="caption" display="block" />
-			)}
+			{loading && <Loader />}
 		</Fragment>
 	);
 };

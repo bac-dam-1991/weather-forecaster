@@ -1,4 +1,4 @@
-import { URLS } from '../config/constants';
+import { URLS } from "../config/constants";
 
 export const arrayDiff = <T extends unknown>(
 	array01: T[],

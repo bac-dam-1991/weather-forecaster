@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from 'react';
-import Typography from '../components/Typography/Typography';
-import { useGetDailyForecast } from '../hooks/useGetForecast';
-import { IGeoCodingResponse } from '../interfaces/IGeoCodingResponse';
-import { LatLng } from '../types/LatLng';
-import axios from 'axios';
-import ForecastContainer from '../components/ForecastsContainer/ForecastContainer';
+import React, { Fragment, useEffect } from "react";
+import Typography from "../components/Typography/Typography";
+import { useGetDailyForecast } from "../hooks/useGetForecast";
+import { IGeoCodingResponse } from "../interfaces/IGeoCodingResponse";
+import { LatLng } from "../types/LatLng";
+import axios from "axios";
+import ForecastContainer from "../components/ForecastsContainer/ForecastContainer";
+import Loader from "../components/Loader/Loader";
 
 export interface DailyViewProps {
 	clearSelectedGeoCode: () => void;
@@ -38,9 +39,7 @@ const DailyView: React.FC<DailyViewProps> = ({
 				onClick={clearSelectedGeoCode}
 				display="block"
 			/>
-			{loading && (
-				<Typography text="Loading..." variant="caption" display="block" />
-			)}
+			{loading && <Loader />}
 			{forecasts && <ForecastContainer forecasts={forecasts} />}
 		</Fragment>
 	);

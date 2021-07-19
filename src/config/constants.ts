@@ -25,3 +25,15 @@ export const MESSAGES = {
 export const SPECIAL_CHARS = {
 	CELSIUS: '℃',
 };
+
+export const CHART_CONFIGS = {
+	VERTICAL_CHART: {
+		indexAxis: 'y',
+		scales: {
+			x: {
+				beginAtZero: true,
+			},
+		},
+		maintainAspectratio: false,
+	},
+};

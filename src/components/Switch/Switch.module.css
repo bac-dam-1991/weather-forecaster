@@ -1,0 +1,12 @@
+.root {
+	height: var(--spacing-large);
+}
+
+.switchContainer {
+	display: block;
+	height: var(--spacing-large);
+	width: 200px;
+	border: 1px solid var(--grey-light);
+	box-sizing: border-box;
+	border-radius: var(--spacing-standard);
+}

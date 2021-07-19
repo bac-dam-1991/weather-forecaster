@@ -1,11 +1,12 @@
-import React, { Fragment, useEffect } from "react";
-import Typography from "../components/Typography/Typography";
-import { useGetDailyForecast } from "../hooks/useGetForecast";
-import { IGeoCodingResponse } from "../interfaces/IGeoCodingResponse";
-import { LatLng } from "../types/LatLng";
-import axios from "axios";
-import ForecastContainer from "../components/ForecastsContainer/ForecastContainer";
-import Loader from "../components/Loader/Loader";
+import React, { Fragment, useEffect } from 'react';
+import Typography from '../components/Typography/Typography';
+import { useGetDailyForecast } from '../hooks/useGetForecast';
+import { IGeoCodingResponse } from '../interfaces/IGeoCodingResponse';
+import { LatLng } from '../types/LatLng';
+import axios from 'axios';
+import ForecastContainer from '../components/ForecastsContainer/ForecastContainer';
+import Loader from '../components/Loader/Loader';
+import Switch from '../components/Switch/Switch';
 
 export interface DailyViewProps {
 	clearSelectedGeoCode: () => void;
@@ -33,12 +34,15 @@ const DailyView: React.FC<DailyViewProps> = ({
 	}, [getDailyForecast, selectedGeoCode]);
 	return (
 		<Fragment>
-			<Typography
-				variant="link"
-				text="< Return"
-				onClick={clearSelectedGeoCode}
-				display="block"
-			/>
+			<div>
+				<Typography
+					variant="link"
+					text="< Return"
+					onClick={clearSelectedGeoCode}
+					display="block"
+				/>
+				<Switch label="hourly" />
+			</div>
 			{loading && <Loader />}
 			{forecasts && <ForecastContainer forecasts={forecasts} />}
 		</Fragment>

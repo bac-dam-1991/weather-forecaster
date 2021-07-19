@@ -15,10 +15,11 @@ export const useGetDailyForecast = () => {
 				setLoading(true);
 				const _forecasts = await getForecast(
 					coordinate,
-					['daily'],
+					['daily', 'hourly'],
 					'metric',
 					cancelToken
 				);
+				console.log({ _forecasts });
 				setForecasts(_forecasts);
 			} catch (error) {
 				setError(error.message);

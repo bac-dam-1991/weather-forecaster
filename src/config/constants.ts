@@ -29,6 +29,13 @@ export const SPECIAL_CHARS = {
 export const CHART_CONFIGS = {
 	VERTICAL_CHART: {
 		indexAxis: 'y',
+		plugins: {
+			legend: {
+				labels: {
+					boxWidth: 20,
+				},
+			},
+		},
 		scales: {
 			x: {
 				beginAtZero: true,

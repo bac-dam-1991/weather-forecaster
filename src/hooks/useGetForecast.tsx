@@ -4,12 +4,12 @@ import { IForecastResponse } from '../interfaces/IForecastResponse';
 import { LatLng } from '../types/LatLng';
 import { CancelToken } from 'axios';
 
-export const useGetDailyForecast = () => {
+export const useGetForecast = () => {
 	const [forecasts, setForecasts] = useState<IForecastResponse | null>(null);
 	const [error, setError] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const getDailyForecast = useCallback(
+	const loadForecast = useCallback(
 		async (coordinate: LatLng, cancelToken: CancelToken) => {
 			try {
 				setLoading(true);
@@ -19,7 +19,6 @@ export const useGetDailyForecast = () => {
 					'metric',
 					cancelToken
 				);
-				console.log({ _forecasts });
 				setForecasts(_forecasts);
 			} catch (error) {
 				setError(error.message);
@@ -30,5 +29,5 @@ export const useGetDailyForecast = () => {
 		[]
 	);
 
-	return { loading, error, forecasts, getDailyForecast };
+	return { loading, error, forecasts, loadForecast };
 };

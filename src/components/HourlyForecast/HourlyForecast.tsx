@@ -3,23 +3,26 @@ import { Line } from 'react-chartjs-2';
 import { CHART_CONFIGS } from '../../config/constants';
 import styles from './HourlyForecast.module.css';
 
-export interface HourlyForecastProps {
-	labels: string[];
+export interface Dataset {
+	label: string;
 	data: number[];
+	fill: boolean;
+	backgroundColor: string;
+	borderColor: string;
 }
 
-const HourlyForecast: React.FC<HourlyForecastProps> = ({ labels, data }) => {
+export interface HourlyForecastProps {
+	labels: string[];
+	datasets: Dataset[];
+}
+
+const HourlyForecast: React.FC<HourlyForecastProps> = ({
+	datasets,
+	labels,
+}) => {
 	const chartData = {
 		labels,
-		datasets: [
-			{
-				label: 'Temperature',
-				data,
-				fill: false,
-				backgroundColor: 'rgb(255, 99, 132)',
-				borderColor: 'rgba(255, 99, 132, 0.2)',
-			},
-		],
+		datasets,
 	};
 
 	return (

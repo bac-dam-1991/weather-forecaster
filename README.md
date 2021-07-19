@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a simple weather forecaster appplication that integrates with OpenWeatherMap API.
+This is a simple weather forecaster appplication that integrates with [OpenWeatherMap API](https://openweathermap.org/).
 
 ## What is can do
 
@@ -13,7 +13,7 @@ This is a simple weather forecaster appplication that integrates with OpenWeathe
 ## Technology
 
 1. ReactJs + Typescript
-2. ChartJs + React wrapper (https://www.npmjs.com/package/react-chartjs-2)
+2. ChartJs + [React ChartJs](https://www.npmjs.com/package/react-chartjs-2) wrapper
 3. Axios for HTTP requests
 4. Moment for datetime
 

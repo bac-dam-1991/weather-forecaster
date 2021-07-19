@@ -1,12 +1,45 @@
 .root {
-	height: var(--spacing-large);
+	height: var(--font-medium);
 }
 
-.switchContainer {
+.labelRight {
+	flex-direction: row-reverse;
+}
+
+.label > input[type='checkbox']:checked + .switch > .slider {
+	transform: translateX(14px);
+}
+
+.label > input[type='checkbox']:checked + .switch {
+	background-color: var(--primary-main);
+}
+
+.label {
+	display: flex;
+	flex-direction: row;
+	font-size: var(--font-body);
+	gap: 4px;
+	align-items: center;
+}
+
+.switch {
 	display: block;
-	height: var(--spacing-large);
-	width: 200px;
-	border: 1px solid var(--grey-light);
-	box-sizing: border-box;
-	border-radius: var(--spacing-standard);
+	position: relative;
+	background-color: var(--grey-main);
+	border-radius: 12px;
+	width: 32px;
+	height: var(--font-medium);
+	transition: var(--duration-standard);
+}
+
+.slider {
+	display: block;
+	position: absolute;
+	background-color: white;
+	width: var(--font-body);
+	height: var(--font-body);
+	top: 2px;
+	left: 2px;
+	border-radius: 50%;
+	transition: var(--duration-standard);
 }

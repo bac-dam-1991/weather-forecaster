@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement } from "react";
+import React, { useEffect, ReactElement } from "react";
 import Container from "../components/Container/Container";
 import Typography from "../components/Typography/Typography";
 import { useGetGeoCodings } from "../hooks/useGetGeoCoding";
@@ -8,23 +8,26 @@ import { formatCityName } from "../utility/utility";
 import styles from "../App.module.css";
 import DailyView from "./DailyView";
 import SearchView from "./SearchView";
+import { useAppContext } from "../context/AppStateContext";
+import { APP_ACTIONS } from "../reducers/AppReducer";
 
 export interface MainViewProps {}
 
 const MainView = (): ReactElement => {
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
-	const [cityName, setCityName] = React.useState<string>("");
 	const { geoCodings, loadGeoCodings, loading, error } = useGetGeoCodings();
-	const [selectedGeoCode, setSelectedGeoCode] =
-		useState<IGeoCodingResponse | null>(null);
+	const { state, dispatch } = useAppContext();
+	const { selectedGeoCode, cityName } = state;
 
 	const handleCityNameChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
-		const val = event.target.value.trim();
-		setCityName(val);
+		const payload = event.target.value.trim();
+		dispatch({ type: APP_ACTIONS.UPDATE_CITY_NAME, payload });
 	};
 
+	// If API returns only one location then
+	// Immediately go to weather forecast
 	useEffect(() => {
 		if (geoCodings.length !== 1) {
 			return;
@@ -33,32 +36,25 @@ const MainView = (): ReactElement => {
 			return;
 		}
 		inputRef.current.value = "";
-		setCityName("");
-		setSelectedGeoCode(geoCodings[0]);
-	}, [geoCodings]);
+		dispatch({
+			type: APP_ACTIONS.AUTO_UPDATE_GEOCODE,
+			payload: geoCodings[0],
+		});
+	}, [geoCodings, dispatch]);
 
-	const handleSelectedGeoCodeChange = (data: IGeoCodingResponse) => {
-		setSelectedGeoCode(data);
+	const handleSelectedGeoCodeChange = (payload: IGeoCodingResponse) => {
+		dispatch({ type: APP_ACTIONS.UPDATE_GEOCODE, payload });
 	};
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
-
 		await loadGeoCodings(cityName);
 		if (!inputRef.current) {
 			return;
 		}
 		inputRef.current.value = "";
-		setCityName("");
+		dispatch({ type: APP_ACTIONS.CLEAR_CITY_NAME });
 	};
-
-	const clearSelectedGeoCode = () => {
-		setSelectedGeoCode(null);
-	};
-
-	useEffect(() => {
-		console.log(selectedGeoCode?.state);
-	}, [selectedGeoCode]);
 
 	return (
 		<Container className={styles.root}>
@@ -86,12 +82,7 @@ const MainView = (): ReactElement => {
 					onSelectedGeoCodeChange={handleSelectedGeoCodeChange}
 				/>
 			)}
-			{selectedGeoCode && (
-				<DailyView
-					clearSelectedGeoCode={clearSelectedGeoCode}
-					selectedGeoCode={selectedGeoCode}
-				/>
-			)}
+			{selectedGeoCode && <DailyView />}
 		</Container>
 	);
 };

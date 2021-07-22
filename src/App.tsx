@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import Container from './components/Container/Container';
-import Typography from './components/Typography/Typography';
-import { useGetGeoCodings } from './hooks/useGetGeoCoding';
-import { IGeoCodingResponse } from './interfaces/IGeoCodingResponse';
-import DailyView from './views/DailyView';
-import SearchView from './views/SearchView';
-import styles from './App.module.css';
+import React, { useState, useEffect } from "react";
+import Container from "./components/Container/Container";
+import Typography from "./components/Typography/Typography";
+import { useGetGeoCodings } from "./hooks/useGetGeoCoding";
+import { IGeoCodingResponse } from "./interfaces/IGeoCodingResponse";
+import DailyView from "./views/DailyView";
+import SearchView from "./views/SearchView";
+import styles from "./App.module.css";
+import { formatCityName } from "./utility/utility";
 
 export interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
-	const [cityName, setCityName] = React.useState<string>('');
+	const [cityName, setCityName] = React.useState<string>("");
 	const { geoCodings, loadGeoCodings, loading, error } = useGetGeoCodings();
 	const [selectedGeoCode, setSelectedGeoCode] =
 		useState<IGeoCodingResponse | null>(null);
 
-	const handleCityNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleCityNameChange = (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const val = event.target.value.trim();
 		setCityName(val);
 	};
@@ -28,8 +31,8 @@ const App: React.FC<AppProps> = () => {
 		if (!inputRef.current) {
 			return;
 		}
-		inputRef.current.value = '';
-		setCityName('');
+		inputRef.current.value = "";
+		setCityName("");
 		setSelectedGeoCode(geoCodings[0]);
 	}, [geoCodings]);
 
@@ -44,17 +47,32 @@ const App: React.FC<AppProps> = () => {
 		if (!inputRef.current) {
 			return;
 		}
-		inputRef.current.value = '';
-		setCityName('');
+		inputRef.current.value = "";
+		setCityName("");
 	};
 
 	const clearSelectedGeoCode = () => {
 		setSelectedGeoCode(null);
 	};
 
+	useEffect(() => {
+		console.log(selectedGeoCode?.state);
+	}, [selectedGeoCode]);
+
 	return (
 		<Container className={styles.root}>
-			<Typography text="Weather forecast" variant="heading" display="block" />
+			<Typography
+				text="Weather forecast"
+				variant="heading"
+				display="block"
+			/>
+			{selectedGeoCode && (
+				<Typography
+					text={formatCityName(selectedGeoCode)}
+					variant="subheading"
+					display="block"
+				/>
+			)}
 			{!selectedGeoCode && (
 				<SearchView
 					onSubmit={handleSubmit}

@@ -1,4 +1,4 @@
-import React, { useEffect, ReactElement } from "react";
+import React, { useEffect, ReactElement, Fragment } from "react";
 import Container from "../components/Container/Container";
 import Typography from "../components/Typography/Typography";
 import { useGetGeoCodings } from "../hooks/useGetGeoCoding";
@@ -6,15 +6,16 @@ import { formatCityName } from "../utility/utility";
 
 import styles from "../App.module.css";
 import DailyView from "./DailyView";
-import SearchView from "./SearchView";
 import { useAppContext } from "../context/AppStateContext";
 import { APP_ACTIONS } from "../reducers/AppReducer";
+import CitySearchBar from "../components/CitySearchBar/CitySearchBar";
+import CitySearchResultsContainer from "../components/CitySearchResultsContainer/CitySearchResultsContainer";
 
 export interface MainViewProps {}
 
 const MainView = (): ReactElement => {
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
-	const { geoCodings, loadGeoCodings, loading, error } = useGetGeoCodings();
+	const { geoCodings, loadGeoCodings } = useGetGeoCodings();
 	const { state, dispatch } = useAppContext();
 	const { selectedGeoCode, cityName } = state;
 
@@ -59,13 +60,13 @@ const MainView = (): ReactElement => {
 				/>
 			)}
 			{!selectedGeoCode && (
-				<SearchView
-					onSubmit={handleSubmit}
-					loading={loading}
-					inputRef={inputRef}
-					error={error}
-					geoCodings={geoCodings}
-				/>
+				<Fragment>
+					<CitySearchBar
+						onSubmit={handleSubmit}
+						inputRef={inputRef}
+					/>
+					<CitySearchResultsContainer />
+				</Fragment>
 			)}
 			{selectedGeoCode && <DailyView />}
 		</Container>

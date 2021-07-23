@@ -3,10 +3,16 @@ import { IGeoCodingResponse } from "../interfaces/IGeoCodingResponse";
 export interface AppState {
 	selectedGeoCode: IGeoCodingResponse | null;
 	cityName: string;
+	geoCodings: IGeoCodingResponse[];
+	geoCodingsError: string;
+	geoCodingsLoading: boolean;
 }
 export const initialState: AppState = {
 	selectedGeoCode: null,
 	cityName: "",
+	geoCodings: [],
+	geoCodingsError: "",
+	geoCodingsLoading: false,
 };
 
 export enum APP_ACTIONS {
@@ -15,6 +21,12 @@ export enum APP_ACTIONS {
 	UPDATE_CITY_NAME,
 	CLEAR_CITY_NAME,
 	AUTO_UPDATE_GEOCODE,
+	CLEAR_GEO_CODINGS,
+	UPDATE_GEO_CODINGS,
+	START_GEO_CODINGS_LOADING,
+	STOP_GEO_CODINGS_LOADING,
+	CLEAR_GEO_CODINGS_ERROR,
+	SET_GEO_CODINGS_ERROR,
 }
 
 export type AppAction =
@@ -25,7 +37,13 @@ export type AppAction =
 	| { type: APP_ACTIONS.CLEAR_GEOCODE }
 	| { type: APP_ACTIONS.UPDATE_CITY_NAME; payload: string }
 	| { type: APP_ACTIONS.AUTO_UPDATE_GEOCODE; payload: IGeoCodingResponse }
-	| { type: APP_ACTIONS.CLEAR_CITY_NAME };
+	| { type: APP_ACTIONS.CLEAR_CITY_NAME }
+	| { type: APP_ACTIONS.CLEAR_GEO_CODINGS }
+	| { type: APP_ACTIONS.START_GEO_CODINGS_LOADING }
+	| { type: APP_ACTIONS.STOP_GEO_CODINGS_LOADING }
+	| { type: APP_ACTIONS.CLEAR_GEO_CODINGS_ERROR }
+	| { type: APP_ACTIONS.SET_GEO_CODINGS_ERROR; payload: string }
+	| { type: APP_ACTIONS.UPDATE_GEO_CODINGS; payload: IGeoCodingResponse[] };
 
 export const appReducer = (state: AppState, action: AppAction): AppState => {
 	switch (action.type) {
@@ -58,6 +76,42 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
 			return {
 				...state,
 				cityName: "",
+			};
+		}
+		case APP_ACTIONS.CLEAR_GEO_CODINGS: {
+			return {
+				...state,
+				geoCodings: [],
+			};
+		}
+		case APP_ACTIONS.UPDATE_GEO_CODINGS: {
+			return {
+				...state,
+				geoCodings: action.payload,
+			};
+		}
+		case APP_ACTIONS.START_GEO_CODINGS_LOADING: {
+			return {
+				...state,
+				geoCodingsLoading: true,
+			};
+		}
+		case APP_ACTIONS.STOP_GEO_CODINGS_LOADING: {
+			return {
+				...state,
+				geoCodingsLoading: false,
+			};
+		}
+		case APP_ACTIONS.CLEAR_GEO_CODINGS_ERROR: {
+			return {
+				...state,
+				geoCodingsError: "",
+			};
+		}
+		case APP_ACTIONS.SET_GEO_CODINGS_ERROR: {
+			return {
+				...state,
+				geoCodingsError: action.payload,
 			};
 		}
 		default: {

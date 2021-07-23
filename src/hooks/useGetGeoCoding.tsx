@@ -14,29 +14,23 @@ export const useGetGeoCodings = () => {
 				if (!cityName) {
 					throw new Error(MESSAGES.CITY_NAME_EMPTY);
 				}
-				dispatch({ type: APP_ACTIONS.CLEAR_GEO_CODINGS });
-				dispatch({ type: APP_ACTIONS.START_GEO_CODINGS_LOADING });
-				dispatch({ type: APP_ACTIONS.CLEAR_GEO_CODINGS_ERROR });
+				dispatch({ type: APP_ACTIONS.START_FETCHING_GEO_CODINGS });
 				const payload = await getGeoCodings(cityName);
 				if (!payload.length) {
 					throw new Error(MESSAGES.CITY_NOT_FOUND);
 				}
 				dispatch({ type: APP_ACTIONS.UPDATE_GEO_CODINGS, payload });
 			} catch (error) {
-				dispatch({ type: APP_ACTIONS.CLEAR_GEO_CODINGS });
+				let payload = error.message;
 				if (
 					error.response &&
 					error.response.status === STATUS_CODES.NOT_FOUND
 				) {
-					dispatch({
-						type: APP_ACTIONS.SET_GEO_CODINGS_ERROR,
-						payload: MESSAGES.CITY_NOT_FOUND,
-					});
-					return;
+					payload = MESSAGES.CITY_NOT_FOUND;
 				}
 				dispatch({
-					type: APP_ACTIONS.SET_GEO_CODINGS_ERROR,
-					payload: error.message,
+					type: APP_ACTIONS.ON_FETCH_GEO_CODINGS_ERROR_THROWN,
+					payload,
 				});
 			} finally {
 				dispatch({ type: APP_ACTIONS.STOP_GEO_CODINGS_LOADING });

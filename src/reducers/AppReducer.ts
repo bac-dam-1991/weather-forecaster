@@ -27,6 +27,8 @@ export enum APP_ACTIONS {
 	STOP_GEO_CODINGS_LOADING,
 	CLEAR_GEO_CODINGS_ERROR,
 	SET_GEO_CODINGS_ERROR,
+	START_FETCHING_GEO_CODINGS,
+	ON_FETCH_GEO_CODINGS_ERROR_THROWN,
 }
 
 export type AppAction =
@@ -43,7 +45,9 @@ export type AppAction =
 	| { type: APP_ACTIONS.STOP_GEO_CODINGS_LOADING }
 	| { type: APP_ACTIONS.CLEAR_GEO_CODINGS_ERROR }
 	| { type: APP_ACTIONS.SET_GEO_CODINGS_ERROR; payload: string }
-	| { type: APP_ACTIONS.UPDATE_GEO_CODINGS; payload: IGeoCodingResponse[] };
+	| { type: APP_ACTIONS.UPDATE_GEO_CODINGS; payload: IGeoCodingResponse[] }
+	| { type: APP_ACTIONS.START_FETCHING_GEO_CODINGS }
+	| { type: APP_ACTIONS.ON_FETCH_GEO_CODINGS_ERROR_THROWN; payload: string };
 
 export const appReducer = (state: AppState, action: AppAction): AppState => {
 	switch (action.type) {
@@ -111,6 +115,21 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
 		case APP_ACTIONS.SET_GEO_CODINGS_ERROR: {
 			return {
 				...state,
+				geoCodingsError: action.payload,
+			};
+		}
+		case APP_ACTIONS.START_FETCHING_GEO_CODINGS: {
+			return {
+				...state,
+				geoCodings: [],
+				geoCodingsLoading: true,
+				geoCodingsError: "",
+			};
+		}
+		case APP_ACTIONS.ON_FETCH_GEO_CODINGS_ERROR_THROWN: {
+			return {
+				...state,
+				geoCodings: [],
 				geoCodingsError: action.payload,
 			};
 		}

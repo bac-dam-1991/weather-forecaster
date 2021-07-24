@@ -1,3 +1,11 @@
 .chart {
 	height: 500px;
 }
+
+.root {
+	display: block;
+	height: 70%;
+	width: 95%;
+	margin: auto;
+	overflow: auto;
+}

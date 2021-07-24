@@ -1,3 +1,7 @@
 .marginBottom {
 	margin-bottom: var(--spacing-standard);
 }
+
+.root {
+	width: 100%;
+}

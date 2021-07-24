@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { CHART_CONFIGS } from '../../config/constants';
 import styles from './HourlyForecast.module.css';
@@ -26,15 +26,15 @@ const HourlyForecast: React.FC<HourlyForecastProps> = ({
 	};
 
 	return (
-		<Fragment>
+		<div className={styles.root}>
 			<Line
 				data={chartData}
 				options={CHART_CONFIGS.VERTICAL_CHART}
 				type="line"
 				className={styles.chart}
-				height={500}
+				height={1000}
 			/>
-		</Fragment>
+		</div>
 	);
 };
 

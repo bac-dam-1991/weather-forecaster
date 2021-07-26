@@ -1,15 +1,15 @@
-import React, { useEffect, ReactElement, Fragment } from "react";
-import Container from "../components/Container/Container";
-import Typography from "../components/Typography/Typography";
-import { useGetGeoCodings } from "../hooks/useGetGeoCoding";
-import { formatCityName } from "../utility/utility";
+import React, { useEffect, ReactElement, Fragment } from 'react';
+import Container from '../components/Container/Container';
+import Typography from '../components/Typography/Typography';
+import { useGetGeoCodings } from '../hooks/useGetGeoCoding';
+import { formatCityName } from '../utility/utility';
 
-import styles from "../App.module.css";
-import DailyView from "./DailyView";
-import { useAppContext } from "../context/AppStateContext";
-import { APP_ACTIONS } from "../reducers/AppReducer";
-import CitySearchBar from "../components/CitySearchBar/CitySearchBar";
-import CitySearchResultsContainer from "../components/CitySearchResultsContainer/CitySearchResultsContainer";
+import styles from '../App.module.css';
+import DailyView from './DailyView';
+import { useAppContext } from '../context/AppStateContext';
+import { APP_ACTIONS } from '../reducers/AppReducer';
+import CitySearchBar from '../components/CitySearchBar/CitySearchBar';
+import CitySearchResultsContainer from '../components/CitySearchResultsContainer/CitySearchResultsContainer';
 
 export interface MainViewProps {}
 
@@ -28,7 +28,7 @@ const MainView = (): ReactElement => {
 		if (!inputRef.current) {
 			return;
 		}
-		inputRef.current.value = "";
+		inputRef.current.value = '';
 		dispatch({
 			type: APP_ACTIONS.AUTO_UPDATE_GEOCODE,
 			payload: geoCodings[0],
@@ -41,16 +41,17 @@ const MainView = (): ReactElement => {
 		if (!inputRef.current) {
 			return;
 		}
-		inputRef.current.value = "";
+		inputRef.current.value = '';
 		dispatch({ type: APP_ACTIONS.CLEAR_CITY_NAME });
 	};
 
 	return (
 		<Container className={styles.root}>
 			<Typography
-				text="Weather forecast"
+				text="WEATHER FORECAST"
 				variant="heading"
 				display="block"
+				bold
 			/>
 			{selectedGeoCode && (
 				<Typography
@@ -61,10 +62,7 @@ const MainView = (): ReactElement => {
 			)}
 			{!selectedGeoCode && (
 				<Fragment>
-					<CitySearchBar
-						onSubmit={handleSubmit}
-						inputRef={inputRef}
-					/>
+					<CitySearchBar onSubmit={handleSubmit} inputRef={inputRef} />
 					<CitySearchResultsContainer />
 				</Fragment>
 			)}

@@ -1,7 +1,7 @@
 export const URLS = {
-	ONE_CALL: 'https://api.openweathermap.org/data/2.5/onecall',
-	GEOCODING: 'http://api.openweathermap.org/geo/1.0/direct',
-	ICON: 'http://openweathermap.org/img/wn/',
+	ONE_CALL: "https://api.openweathermap.org/data/2.5/onecall",
+	GEOCODING: "http://api.openweathermap.org/geo/1.0/direct",
+	ICON: "http://openweathermap.org/img/wn/",
 };
 
 export const API_KEY = process.env.REACT_APP_API_KEY;
@@ -18,17 +18,18 @@ export const DURATIONS = {
 };
 
 export const MESSAGES = {
-	CITY_NOT_FOUND: 'No city found matching provided city name.',
-	CITY_NAME_EMPTY: 'City name cannot be empty.',
+	CITY_NOT_FOUND: "No city found matching provided city name.",
+	CITY_NAME_EMPTY: "City name cannot be empty.",
+	MISSING_API_KEY: "Missing API key.",
 };
 
 export const SPECIAL_CHARS = {
-	CELSIUS: '℃',
+	CELSIUS: "℃",
 };
 
 export const CHART_CONFIGS = {
 	VERTICAL_CHART: {
-		indexAxis: 'y',
+		indexAxis: "y",
 		plugins: {
 			legend: {
 				labels: {

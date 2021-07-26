@@ -43,6 +43,7 @@ const CitySearchBar: React.FC<CitySearchBarProps> = ({
 					defaultValue={cityName}
 					placeholder="Enter a city name"
 					ref={inputRef}
+					type="search"
 				/>
 				<Button
 					label="Search"
